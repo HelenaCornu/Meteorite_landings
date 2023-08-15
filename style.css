@@ -1,0 +1,94 @@
+.titlecard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 350px;
+}
+
+hgroup {
+    width:416px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3rem;
+    font-family: Oswald;
+    font-weight: 700;
+    color: #4A587B;
+    text-transform: uppercase;
+    margin-bottom: 2.25rem;
+}
+
+p {
+    font-size: 1.125rem;
+    font-family: Roboto; 
+    font-weight: 400;
+    color: #2F4858;
+    line-height: 1.5rem;
+}
+
+.map {
+    height: 450px;
+    background-color: lightsteelblue;
+}
+
+.viewOptions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    gap: 15px;
+}
+
+.order{
+    margin-left: 20px;
+}
+
+.order p {
+    font-size: 0.75rem;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: center;
+}
+
+.cardbox {
+    width: 23%;
+    padding: 15px;
+    border: 1px solid #4A587B;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    margin-top: 25px;
+}
+
+h2 {
+    color: #2F4858;
+    font-family: Roboto;
+    font-size: 0.875rem;
+    font-weight: 700;
+    margin-bottom: 1.56rem;
+}
+
+h3 {
+    color: #2F4858;
+    font-family: Roboto;
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.cardbox p {
+    color: #9E9E9E;
+    font-family: Roboto;
+    font-size: 0.75rem;
+    margin-top: 1rem;
+}
+
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}

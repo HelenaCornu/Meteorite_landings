@@ -51,9 +51,30 @@ function handleTabsToggle() {
   };
 }
 
+function loadData() {
+  let rawElements = Array.from(Array(10).keys());
+  let content = "";
+  let cardsContainer = document.querySelector("#cards-section");
+
+  for (let i = 0; i < rawElements.length; i++) {
+    let cardTemplate = `<div class="cardbox">
+    <h2>Meteorite name</h2>
+      <h3>Ureilite-pmict class</h3>
+      <h3>60.34 grams</h3>
+      <p class="alignleft">Fell</p>
+      <p class="alignright">Dec, 2021</p>
+      <div style="clear: both"></div>
+  </div>`;
+
+    content = content + cardTemplate;
+  }
+  cardsContainer.innerHTML = content;
+}
+
 function startApp() {
   initMap();
   handleTabsToggle();
+  loadData();
 }
 
 startApp();

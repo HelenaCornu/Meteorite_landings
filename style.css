@@ -37,6 +37,12 @@ p {
   align-items: center;
   height: 200px;
   gap: 15px;
+  cursor: pointer;
+}
+
+/*this is a pseudo class */
+.viewOptions:hover {
+
 }
 
 .order {
@@ -61,6 +67,12 @@ p {
   box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
   margin-top: 25px;
+  transition: all 300ms ease;
+}
+
+.cardbox:hover {
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
 h2 {
@@ -90,4 +102,12 @@ h3 {
 }
 .alignright {
   float: right;
+}
+
+.disable-text {
+  color: #e6e6e6;
+}
+
+.hide {
+  display: none;
 }

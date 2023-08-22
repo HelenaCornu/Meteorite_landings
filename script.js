@@ -52,25 +52,39 @@ function handleTabsToggle() {
 }
 
 function loadData() {
-  let rawElements = Array.from(Array(10).keys());
-  let content = "";
-  let cardsContainer = document.querySelector("#cards-section");
+  //This lets us import the data from the local json file using axios -- you can't link like you would an html file -- and then manipulating it
+  //You can only use .then with the Axios command -- so everything to do with the data is included in this function, to ensure that the data is loaded before the script proceeds (otherwise it throws an error)
+  axios.get("./Meteorite_Landings_dataset.json").then(function (response) {
+    //Since we present the data sorted by size, we first sort the data, using the .sort function (the compare function sorts descending and ensures that sort produces correct results even if the numbers are strings)
+    let rawElements = response.data.sort(function (a, b) {
+      return b.mass - a.mass;
+    });
+    //You then extract only part of the data because otherwise the dataset is way too big. Carlos' rule = 10,000 max
+    rawElements = rawElements.splice(0, 100);
+    let content = "";
 
-  for (let i = 0; i < rawElements.length; i++) {
-    let cardTemplate = `<div class="cardbox">
-    <h2>Meteorite name</h2>
-      <h3>Ureilite-pmict class</h3>
-      <h3>60.34 grams</h3>
+    //Adding in the data into the cards, and iterating to create as many cards as there are data points
+    //Note, the original data gives mass in grams; here it is modified to give the mass in tons for readability
+    let cardsContainer = document.querySelector("#cards-section");
+
+    for (let i = 0; i < rawElements.length; i++) {
+      let currentElement = rawElements[i];
+      let cardTemplate = `<div class="cardbox">
+      <h2>${currentElement.name}</h2>
+      <h3>${currentElement.recclass} class</h3>
+      <h3>${currentElement.mass / 1000000} tons</h3>
       <p class="alignleft">Fell</p>
-      <p class="alignright">Dec, 2021</p>
+      <p class="alignright">${currentElement.year.substr(6, 4)}</p>
       <div style="clear: both"></div>
   </div>`;
 
-    content = content + cardTemplate;
-  }
-  cardsContainer.innerHTML = content;
+      content = content + cardTemplate;
+    }
+    cardsContainer.innerHTML = content;
+  });
 }
 
+//Once you have defined all the functions, you add all of them to one function, which is the only function executed within the script
 function startApp() {
   initMap();
   handleTabsToggle();

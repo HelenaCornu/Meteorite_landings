@@ -52,23 +52,27 @@ function handleTabsToggle() {
 }
 
 function loadData() {
-  let rawElements = Array.from(Array(10).keys());
-  let content = "";
-  let cardsContainer = document.querySelector("#cards-section");
+  axios.get("./Meteorite_Landings_dataset.json").then(function (response) {
+    let rawElements = response.data.sort();
 
-  for (let i = 0; i < rawElements.length; i++) {
-    let cardTemplate = `<div class="cardbox">
-    <h2>Meteorite name</h2>
-      <h3>Ureilite-pmict class</h3>
-      <h3>60.34 grams</h3>
-      <p class="alignleft">Fell</p>
-      <p class="alignright">Dec, 2021</p>
-      <div style="clear: both"></div>
-  </div>`;
+    let content = "";
+    let cardsContainer = document.querySelector("#cards-section");
 
-    content = content + cardTemplate;
-  }
-  cardsContainer.innerHTML = content;
+    for (let i = 0; i < rawElements.length; i++) {
+      let currentElement = rawElements[i];
+      let cardTemplate = `<div class="cardbox">
+      <h2>${currentElement.name}</h2>
+        <h3>Ureilite-pmict class</h3>
+        <h3>60.34 grams</h3>
+        <p class="alignleft">Fell</p>
+        <p class="alignright">Dec, 2021</p>
+        <div style="clear: both"></div>
+    </div>`;
+
+      content = content + cardTemplate;
+    }
+    cardsContainer.innerHTML = content;
+  });
 }
 
 function startApp() {

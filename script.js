@@ -1,6 +1,6 @@
 function initMap() {
   // init map
-  var map = L.map("map").setView([51.505, -0.09], 13);
+  var map = L.map("map").setView([0, 0], 2);
   // add tile layer
   L.tileLayer(
     "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
@@ -61,26 +61,42 @@ function loadData() {
     });
     //You then extract only part of the data because otherwise the dataset is way too big. Carlos' rule = 10,000 max
     rawElements = rawElements.splice(0, 100);
-    let content = "";
+    let cardContent = "";
+    let tableContent = "";
 
     //Adding in the data into the cards, and iterating to create as many cards as there are data points
     //Note, the original data gives mass in grams; here it is modified to give the mass in tons for readability
+    //The meteorite name links to its official page in the Meteoritical Society database
     let cardsContainer = document.querySelector("#cards-section");
+    let tableContainer = document.querySelector("#table-rows");
 
     for (let i = 0; i < rawElements.length; i++) {
       let currentElement = rawElements[i];
-      let cardTemplate = `<div class="cardbox">
+      let cardTemplate = `<div class="cardbox"><a href="https://www.lpi.usra.edu/meteor/metbull.php?code=${
+        currentElement.id
+      }" target ="_blank">
       <h2>${currentElement.name}</h2>
       <h3>${currentElement.recclass} class</h3>
       <h3>${currentElement.mass / 1000000} tons</h3>
       <p class="alignleft">Fell</p>
       <p class="alignright">${currentElement.year.substr(6, 4)}</p>
-      <div style="clear: both"></div>
+      <div style="clear: both"></div></a>
   </div>`;
 
-      content = content + cardTemplate;
+      let tableTemplate = `<tr>
+      <td><a href="https://www.lpi.usra.edu/meteor/metbull.php?code=${
+        currentElement.id
+      }" target ="_blank">${currentElement.name}</a></td>
+      <td>${currentElement.recclass}</td>
+      <td>${currentElement.mass / 1000000}</td>
+      <td>${currentElement.year.substr(6, 4)}</td>
+    </tr>`;
+
+      cardContent = cardContent + cardTemplate;
+      tableContent = tableContent + tableTemplate;
     }
-    cardsContainer.innerHTML = content;
+    cardsContainer.innerHTML = cardContent;
+    tableContainer.innerHTML = tableContent;
   });
 }
 

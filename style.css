@@ -28,7 +28,7 @@ p {
 }
 
 #map {
-  height: 450px;
+  height: 550px;
 }
 
 .viewOptions {
@@ -50,7 +50,7 @@ p {
 }
 
 .order p {
-  font-size: 0.75rem;
+  font-size: 1rem;
 }
 
 .cards {
@@ -73,6 +73,52 @@ p {
 .cardbox:hover {
   cursor: pointer;
   transform: scale(1.05);
+}
+
+.cardbox a {
+  text-decoration: none;
+}
+
+
+table {
+  border-collapse: collapse;
+  margin: 25px auto;
+  font-size: 1.125rem;
+  font-family: Roboto;
+  color: #2f4858;
+  width:80%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  transition: all 300ms ease;
+}
+
+table thead tr {
+  background-color: #2f4858;
+  color: #ffffff;
+}
+
+table, th, td {
+  border-bottom: 1px solid;
+  border-color: lightgrey;
+  vertical-align: middle;
+}
+
+td, th {
+  text-align: center;
+  padding: 15px;
+}
+
+/* Giving every other row a different colour */
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+tr:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  background-color: #c1c8cd;
+}
+
+/* Solid line after the final row to indicate the table is done */
+table tbody tr:last-of-type {
+  border-bottom: 2px solid #2f4858;
 }
 
 h2 {

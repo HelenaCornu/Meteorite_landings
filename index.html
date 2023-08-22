@@ -6,11 +6,12 @@
     <title>Meteorite landings</title>
     <!-- This is the CSS reset-->
     <link rel="stylesheet" href="cssreset.css" />
-    <!-- This is my own stylesheet-->
+    <!-- Loading the required Google Fonts -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Oswald|Roboto"
     />
+    <!-- Loading Leaflet so that we can display the map -->
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -23,6 +24,7 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
+    <!-- This is my own stylesheet-->
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -42,10 +44,25 @@
       <p class="disable-text" id="table-btn">Table View</p>
     </div>
     <div class="order">
-      <p>Showing 100 records ordered by descending mass (ton)</p>
+      <p>Showing the top 100 records ordered by descending mass (ton)</p>
     </div>
-    <section id="table-section" class="hide">Table</section>
     <section id="cards-section" class="cards"></section>
+    <section id="table-section" class="hide">
+      <div style="overflow-x:auto;">
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Class</th>
+        <th>Mass (tons)</th>
+        <th>Fell (year)</th>
+      </tr>
+    </thead>
+    <tbody id="table-rows">
+    </tbody>
+    </table>
+  </div>
+  </section>
     <!--This adds Axios so that we can import the data from the json file. You have to put it before your javascript file so that it's all loaded before you run the functions-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- This adds Day.js so that we can modify the date format; couldn't figure out how to parse the date format given by the dataset -->

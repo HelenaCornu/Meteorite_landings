@@ -1,25 +1,25 @@
-function initMap() {
-  // init map
-  var map = L.map("map").setView([0, 0], 2);
-  // add tile layer
-  L.tileLayer(
-    "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
-    {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: "abcd",
-      maxZoom: 20,
-    }
-  ).addTo(map);
+// function initMap() {
+//   // init map
+//   var map = L.map("map").setView([0, 0], 2);
+//   // add tile layer
+//   L.tileLayer(
+//     "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+//     {
+//       attribution:
+//         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+//       subdomains: "abcd",
+//       maxZoom: 20,
+//     }
+//   ).addTo(map);
 
-  // add marker
-  var circle = L.circle([51.508, -0.11], {
-    color: "red",
-    fillColor: "#f03",
-    fillOpacity: 0.5,
-    radius: 500,
-  }).addTo(map);
-}
+//   //add marker
+//   var circle = L.circle([51.508, -0.11], {
+//     color: "red",
+//     fillColor: "#f03",
+//     fillOpacity: 0.5,
+//     radius: 500,
+//   }).addTo(map);
+// }
 
 function handleTabsToggle() {
   //let cardBTN = document.getElementById("card-btn");
@@ -61,10 +61,24 @@ function loadData() {
     });
     //You then extract only part of the data because otherwise the dataset is way too big. Carlos' rule = 10,000 max
     rawElements = rawElements.splice(0, 100);
+
+    // init map
+    var map = L.map("map").setView([0, 0], 2);
+    // add tile layer
+    L.tileLayer(
+      "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+      {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: "abcd",
+        maxZoom: 20,
+      }
+    ).addTo(map);
+
     let cardContent = "";
     let tableContent = "";
 
-    //Adding in the data into the cards, and iterating to create as many cards as there are data points
+    //Adding in the data into the cards, and iterating to create as many cards as there are data points; same for the table
     //Note, the original data gives mass in grams; here it is modified to give the mass in tons for readability
     //The meteorite name links to its official page in the Meteoritical Society database
     let cardsContainer = document.querySelector("#cards-section");
@@ -92,9 +106,26 @@ function loadData() {
       <td>${currentElement.year.substr(6, 4)}</td>
     </tr>`;
 
+      //add circles for each meteorite
+      var circle = L.circle([currentElement.reclat, currentElement.reclong], {
+        color: "red",
+        fillColor: "#f03",
+        fillOpacity: 0.5,
+        radius: currentElement.mass * 0.008,
+      }).addTo(map);
+
+      // circle.bindPopup(
+      //   `${currentElement.name},
+      //   ${currentElement.reclat}, ${currentElement.reclat}`
+      // );
+
+      circle.bindPopup(`<h2>${currentElement.name} 
+       ${currentElement.reclat}, ${currentElement.reclat}</h2>`);
+
       cardContent = cardContent + cardTemplate;
       tableContent = tableContent + tableTemplate;
     }
+
     cardsContainer.innerHTML = cardContent;
     tableContainer.innerHTML = tableContent;
   });
@@ -102,7 +133,7 @@ function loadData() {
 
 //Once you have defined all the functions, you add all of them to one function, which is the only function executed within the script
 function startApp() {
-  initMap();
+  // initMap();
   handleTabsToggle();
   loadData();
 }

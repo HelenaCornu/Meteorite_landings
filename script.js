@@ -106,7 +106,7 @@ function loadData() {
       <td>${currentElement.year.substr(6, 4)}</td>
     </tr>`;
 
-      //add circles for each meteorite
+      //add circles for each meteorite; radius is proportional to the mass
       var circle = L.circle([currentElement.reclat, currentElement.reclong], {
         color: "red",
         fillColor: "#f03",

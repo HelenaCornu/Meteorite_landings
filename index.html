@@ -65,8 +65,9 @@
   </section>
     <!--This adds Axios so that we can import the data from the json file. You have to put it before your javascript file so that it's all loaded before you run the functions-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <!-- This adds Day.js so that we can modify the date format; couldn't figure out how to parse the date format given by the dataset -->
-    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <!-- This adds Day.js so that we can modify the date format; not needed since the dates are all given for January 1st -->
+    <!-- When tested, dayjs().format('MMM, YYYY') gave February, Year when the date was formatted as 02/01/year -->
+    <!-- <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script> -->
     <script src="./script.js"></script>
   </body>
 </html>

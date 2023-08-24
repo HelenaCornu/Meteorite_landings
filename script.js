@@ -122,7 +122,7 @@ function loadData() {
       }).addTo(map);
 
       circle.bindPopup(`<h2>${currentElement.name} 
-       ${currentElement.reclat}, ${currentElement.reclat}</h2>`);
+       ${currentElement.reclat}, ${currentElement.reclong}</h2>`);
 
       cardContent = cardContent + cardTemplate;
       tableContent = tableContent + tableTemplate;
@@ -134,11 +134,13 @@ function loadData() {
       var div = L.DomUtil.create("div", "legend");
       div.innerHTML += "<h4>Legend</h4>";
       div.innerHTML +=
-        '<span class="empty-circle"></span>&nbsp;&nbsp;<span class="legend-text">Mass (tons)</span><br>';
+        '<span class="empty-circle"></span>&nbsp;&nbsp;<span class="legend-text">Mass (tons)*</span><br>';
       div.innerHTML +=
         '<span class="orange-square"></span>&nbsp;&nbsp;<span class="legend-text">Fell</span><br>';
       div.innerHTML +=
         '<span class="blue-square"></span>&nbsp;&nbsp;<span class="legend-text">Found</span><br>';
+      div.innerHTML +=
+        "<p>*due to map distortion, circles closer to the poles will appear larger</p>";
 
       return div;
     };

@@ -60,7 +60,7 @@ function loadData() {
       return b.mass - a.mass;
     });
     //You then extract only part of the data because otherwise the dataset is way too big. Carlos' rule = 10,000 max
-    rawElements = rawElements.splice(0, 100);
+    rawElements = rawElements.splice(0, 500);
 
     // init map
     var map = L.map("map").setView([0, 0], 2);
@@ -92,7 +92,7 @@ function loadData() {
       <h2>${currentElement.name}</h2>
       <h3>${currentElement.recclass} class</h3>
       <h3>${currentElement.mass / 1000000} tons</h3>
-      <p class="alignleft">Fell</p>
+      <p class="alignleft">${currentElement.fall}</p>
       <p class="alignright">${currentElement.year.substr(6, 4)}</p>
       <div style="clear: both"></div></a>
   </div>`;
@@ -103,21 +103,23 @@ function loadData() {
       }" target ="_blank">${currentElement.name}</a></td>
       <td>${currentElement.recclass}</td>
       <td>${currentElement.mass / 1000000}</td>
-      <td>${currentElement.year.substr(6, 4)}</td>
+      <td>${currentElement.fall} ${currentElement.year.substr(6, 4)}</td>
     </tr>`;
 
-      //add circles for each meteorite; radius is proportional to the mass
+      //add circles for each meteorite
+      //radius is proportional to the mass
+      //Colour depends on the fall status
+
+      function getColour(f) {
+        return f === "Fell" ? "#FC8D62" : f === "Found" ? "#8DA0CB" : "#4F4F4F";
+      }
+
       var circle = L.circle([currentElement.reclat, currentElement.reclong], {
-        color: "red",
-        fillColor: "#f03",
+        color: getColour(currentElement.fall),
+        fillcolor: getColour(currentElement.fall),
         fillOpacity: 0.5,
         radius: currentElement.mass * 0.008,
       }).addTo(map);
-
-      // circle.bindPopup(
-      //   `${currentElement.name},
-      //   ${currentElement.reclat}, ${currentElement.reclat}`
-      // );
 
       circle.bindPopup(`<h2>${currentElement.name} 
        ${currentElement.reclat}, ${currentElement.reclat}</h2>`);
@@ -125,6 +127,23 @@ function loadData() {
       cardContent = cardContent + cardTemplate;
       tableContent = tableContent + tableTemplate;
     }
+
+    var legend = L.control({ position: "bottomright" });
+
+    legend.onAdd = function (map) {
+      var div = L.DomUtil.create("div", "legend");
+      div.innerHTML += "<h4>Legend</h4>";
+      div.innerHTML +=
+        '<span class="empty-circle"></span>&nbsp;&nbsp;<span class="legend-text">Mass (tons)</span><br>';
+      div.innerHTML +=
+        '<span class="orange-square"></span>&nbsp;&nbsp;<span class="legend-text">Fell</span><br>';
+      div.innerHTML +=
+        '<span class="blue-square"></span>&nbsp;&nbsp;<span class="legend-text">Found</span><br>';
+
+      return div;
+    };
+
+    legend.addTo(map);
 
     cardsContainer.innerHTML = cardContent;
     tableContainer.innerHTML = tableContent;

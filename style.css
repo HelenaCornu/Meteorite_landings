@@ -31,6 +31,57 @@ p {
   height: 550px;
 }
 
+/* Legend styling */
+.legend {
+  padding: 0.5rem;
+  font-family: Roboto;
+  background: white;
+  /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
+  /*border-radius: 5px;*/
+  color: #555;
+}
+
+h4 {
+  text-align: center;
+  font-size: 1rem;
+  margin: 0.5rem;
+  margin-bottom: 1rem;
+  color: #777;
+}
+
+.empty-circle {
+  height: 0.75rem;
+  width: 0.75rem;
+  border-radius: 50%;
+  border-width: 2px;
+  border-style: solid;
+  border-color: darkgrey;
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+.orange-square {
+  height: 0.75rem;
+  width: 0.75rem;
+  background-color: #FC8D62;
+  display: inline-block;
+margin-left: 0.5rem;}
+
+.blue-square {
+  height: 0.75rem;
+  width: 0.75rem;
+  background-color: #8DA0CB;
+display: inline-block;
+margin-left: 0.5rem;}
+
+.legend-text {
+  font-size: 1rem;
+  margin-right: 0.5rem;
+  color: #2f4858;
+}
+
+
+
 .viewOptions {
   display: flex;
   justify-content: center;
@@ -38,11 +89,6 @@ p {
   height: 200px;
   gap: 15px;
   cursor: pointer;
-}
-
-/*this is a pseudo class */
-.viewOptions:hover {
-
 }
 
 .order {
